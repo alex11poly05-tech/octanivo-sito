@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — Octanivo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#090f0d; --surface:#111815; --green:#43d854; --green-dark:#1fa63a;
+    --text:#f5f7f6; --text-soft:#a9b3ae; --line: rgba(245,247,246,0.09);
+  }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--bg); color:var(--text); font-family:'Inter',sans-serif; line-height:1.7; }
+  h1,h2{ font-family:'Space Grotesk',sans-serif; letter-spacing:-0.01em; }
+  a{ color:var(--green); }
+  p, li{ color:var(--text-soft); }
+  .wrap{ max-width:760px; margin:0 auto; padding:0 32px; }
+
+  header.site{ border-bottom:1px solid var(--line); }
+  nav.wrap{ display:flex; align-items:center; justify-content:space-between; padding:18px 32px; }
+  .logo{ display:flex; align-items:center; gap:10px; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.1rem; }
+  .logo-mark{ width:30px; height:30px; border-radius:9px; background:linear-gradient(160deg,var(--green),var(--green-dark)); position:relative; flex-shrink:0; }
+  .logo-mark::after{ content:""; position:absolute; left:50%; top:50%; width:9px; height:14px; transform:translate(-50%,-52%); border:2px solid #061009; border-radius:2px 2px 4px 4px; }
+  nav a.back{ font-size:0.9rem; color:var(--text-soft); text-decoration:none; }
+  nav a.back:hover{ color:var(--green); }
+
+  main{ padding:56px 0 80px; }
+  .eyebrow{ font-family:'JetBrains Mono',monospace; font-size:0.8rem; color:var(--green); }
+  h1{ font-size:clamp(1.8rem,4vw,2.4rem); margin:10px 0 6px; }
+  .updated{ color:var(--text-soft); font-size:0.9rem; margin-bottom:44px; }
+
+  section{ margin-bottom:36px; border-top:1px solid var(--line); padding-top:24px; }
+  h2{ font-size:1.15rem; margin-bottom:10px; }
+  ul{ padding-left:20px; margin:10px 0; }
+  li{ margin-bottom:6px; }
+
+  footer.site{ border-top:1px solid var(--line); padding:32px 0 48px; }
+  footer.site .wrap{ font-size:0.85rem; color:var(--text-soft); }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <nav class="wrap">
+    <div class="logo"><span class="logo-mark"></span> Octanivo</div>
+    <a class="back" href="index.html">← Torna al sito</a>
+  </nav>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="eyebrow">Documento legale</div>
+    <h1>Privacy Policy</h1>
+    <p class="updated">Ultimo aggiornamento: 12 settembre 2026</p>
+
+    <section>
+      <h2>Introduzione</h2>
+      <p>Questa informativa spiega quali dati raccoglie l'app Octanivo (sviluppata in Flutter, package <code class="mono">com.poli.octanivo</code>), come vengono usati e quali scelte hai a disposizione. Usando Octanivo accetti le pratiche descritte qui sotto.</p>
+    </section>
+
+    <section>
+      <h2>Dati raccolti</h2>
+      <ul>
+        <li><strong>Posizione:</strong> la tua posizione viene utilizzata per offrirti funzioni basate sulla zona in cui ti trovi, come distributori vicini, distanze, il distributore più vicino e la pianificazione dei percorsi. Puoi disattivarla dalle impostazioni del telefono: l'app resta comunque utilizzabile tramite ricerca manuale del luogo o della destinazione.</li>
+        <li><strong>Dati del Garage:</strong> nome, tipo, carburante, consumo, capacità del serbatoio e icona dei veicoli che salvi. Questi dati restano sul tuo dispositivo.</li>
+        <li><strong>Preferenze:</strong> carburante preferito, raggio di ricerca, lingua e impostazioni delle notifiche.</li>
+        <li><strong>Trip Planner:</strong> punti di partenza e destinazione che inserisci per stimare distanza, durata, consumo e costo di un viaggio.</li>
+        <li><strong>Assistente vocale:</strong> se lo attivi, l'audio della tua voce viene elaborato per riconoscere i comandi (ricerca, cambio carburante o raggio, navigazione) tramite i servizi di riconoscimento vocale del sistema operativo. Puoi continuare a usare l'app senza attivare l'assistente vocale.</li>
+        <li><strong>Acquisti Premium:</strong> se attivi Octanivo Premium, l'acquisto viene gestito tramite Google Play Billing; Octanivo non memorizza i dati della tua carta di pagamento.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Come usiamo i dati</h2>
+      <p>I dati servono esclusivamente a far funzionare le funzionalità dell'app: trovare e confrontare distributori, filtrare i risultati, pianificare viaggi, avviare la navigazione e inviare notifiche sui prezzi. Non vendiamo i tuoi dati a terzi.</p>
+    </section>
+
+    <section>
+      <h2>Fonti dei prezzi carburante</h2>
+      <p>I prezzi mostrati in app provengono da dati pubblici sui carburanti, inclusi i dati messi a disposizione dal MIMIT (Ministero delle Imprese e del Made in Italy), e vengono aggiornati periodicamente. I prezzi possono variare rispetto a quelli effettivi al distributore.</p>
+    </section>
+
+    <section>
+      <h2>Condivisione con terze parti</h2>
+      <p>Octanivo si appoggia a servizi esterni per funzionare:</p>
+      <ul>
+        <li><strong>Google Maps</strong> per la visualizzazione della mappa e dei distributori;</li>
+        <li><strong>Google Routes API</strong> per il calcolo dei percorsi e della navigazione;</li>
+        <li><strong>Google Play Billing</strong> per la gestione dell'abbonamento Octanivo Premium.</li>
+      </ul>
+      <p>Questi fornitori ricevono solo i dati necessari a offrire il proprio servizio (ad esempio la posizione per calcolare un percorso).</p>
+    </section>
+
+    <section>
+      <h2>Conservazione dei dati</h2>
+      <p>I dati del Garage e le preferenze restano salvati localmente sul tuo dispositivo finché non li elimini tu stesso dall'app o non disinstalli Octanivo.</p>
+    </section>
+
+    <section>
+      <h2>I tuoi diritti</h2>
+      <p>Puoi consultare, modificare o eliminare in qualsiasi momento i dati salvati nell'app dalle sezioni Garage e Preferenze, oppure scrivendoci direttamente.</p>
+    </section>
+
+    <section>
+      <h2>Contatti</h2>
+      <p>Per qualsiasi domanda su questa informativa, scrivi a <a href="mailto:info@octanivo.it">info@octanivo.it</a>.</p>
+    </section>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">© <span id="year"></span> Octanivo</div>
+</footer>
+
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

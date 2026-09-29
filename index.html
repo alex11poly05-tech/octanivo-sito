@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Octanivo — Trova distributori e confronta i prezzi carburante</title>
+<meta name="description" content="Trova distributori vicino a te, confronta i prezzi del carburante, gestisci i tuoi veicoli e pianifica i tuoi viaggi con Octanivo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #090f0d;
+    --surface: #111815;
+    --surface-light: #18211d;
+    --green: #43d854;
+    --green-dark: #1fa63a;
+    --text: #f5f7f6;
+    --text-soft: #a9b3ae;
+    --line: rgba(245,247,246,0.09);
+    --line-strong: rgba(245,247,246,0.16);
+    --glow: rgba(67,216,84,0.35);
+  }
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:'Space Grotesk',sans-serif;
+    margin:0;
+    letter-spacing:-0.01em;
+    font-weight:600;
+  }
+  .mono{ font-family:'JetBrains Mono',monospace; }
+  a{ color:inherit; }
+  p{ color:var(--text-soft); }
+  .wrap{ max-width:1160px; margin:0 auto; padding:0 32px; }
+  section{ padding:96px 0; }
+  .label{
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.8rem;
+    color:var(--green);
+  }
+  .section-head{ max-width:640px; margin-bottom:52px; }
+  .section-head h2{ font-size:clamp(1.7rem,3.4vw,2.3rem); margin-top:10px; }
+  .section-head p{ margin-top:14px; font-size:1.02rem; }
+
+  .reveal{ opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+  @media (prefers-reduced-motion: reduce){
+    .reveal{ opacity:1; transform:none; transition:none; }
+  }
+
+  header.site{
+    position:sticky; top:0; z-index:50;
+    border-bottom:1px solid transparent;
+    transition:background .3s ease, border-color .3s ease, backdrop-filter .3s ease;
+  }
+  header.site.scrolled{
+    background:rgba(9,15,13,0.82);
+    backdrop-filter:blur(10px);
+    border-color:var(--line);
+  }
+  nav.wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 32px;
+  }
+  .logo{
+    display:flex; align-items:center; gap:10px;
+    font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.1rem;
+  }
+  .logo-mark{
+    width:30px; height:30px; border-radius:9px;
+    background:linear-gradient(160deg, var(--green), var(--green-dark));
+    position:relative; flex-shrink:0;
+    box-shadow:0 0 18px var(--glow);
+  }
+  .logo-mark::after{
+    content:""; position:absolute; left:50%; top:50%;
+    width:9px; height:14px; transform:translate(-50%,-52%);
+    border:2px solid #061009; border-radius:2px 2px 4px 4px;
+  }
+  .nav-links{
+    display:flex; gap:30px; font-size:0.92rem; color:var(--text-soft);
+  }
+  .nav-links a{ text-decoration:none; }
+  .nav-links a:hover{ color:var(--text); }
+  .nav-right{ display:flex; align-items:center; gap:18px; }
+  .burger{ display:none; background:none; border:none; color:var(--text); font-size:1.4rem; cursor:pointer; }
+
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:12px 22px; border-radius:10px;
+    font-size:0.94rem; font-weight:600;
+    text-decoration:none; border:1px solid transparent;
+    transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease, background .15s ease;
+  }
+  .btn-primary{
+    background:linear-gradient(160deg, var(--green), var(--green-dark));
+    color:#04140a;
+  }
+  .btn-primary:hover{ box-shadow:0 8px 28px var(--glow); transform:translateY(-1px); }
+  .btn-ghost{
+    border-color:var(--line-strong); color:var(--text); background:rgba(245,247,246,0.02);
+  }
+  .btn-ghost:hover{ border-color:var(--green); color:var(--green); }
+  .btn-sm{ padding:9px 16px; font-size:0.85rem; }
+
+  .hero{ padding:76px 0 40px; overflow:hidden; }
+  .hero .wrap{
+    display:grid; grid-template-columns:1.05fr 0.95fr; gap:56px; align-items:center;
+  }
+  .hero h1{
+    font-size:clamp(2.4rem,5vw,3.6rem); line-height:1.08; max-width:13ch;
+  }
+  .hero p.lead{ margin-top:22px; max-width:44ch; font-size:1.08rem; }
+  .cta-row{ display:flex; gap:14px; margin-top:32px; flex-wrap:wrap; }
+
+  .phone-stage{ position:relative; display:flex; justify-content:center; }
+  .phone{
+    width:280px; height:568px; border-radius:38px;
+    background:var(--surface);
+    border:1px solid var(--line-strong);
+    box-shadow:0 0 90px -20px var(--glow), 0 40px 80px -30px rgba(0,0,0,0.7);
+    position:relative; padding:14px;
+  }
+  .phone-notch{
+    position:absolute; top:14px; left:50%; transform:translateX(-50%);
+    width:90px; height:18px; background:var(--bg); border-radius:0 0 14px 14px; z-index:3;
+  }
+  .phone-screen{
+    width:100%; height:100%; border-radius:26px; overflow:hidden;
+    background:radial-gradient(circle at 30% 20%, #10221a 0%, #0a1310 60%, #08100d 100%);
+    position:relative;
+  }
+  .phone-screen svg{ width:100%; height:100%; display:block; }
+  .price-chip{
+    position:absolute; background:var(--surface-light); border:1px solid var(--line-strong);
+    border-radius:8px; padding:4px 8px; font-family:'JetBrains Mono',monospace;
+    font-size:0.62rem; color:var(--green); box-shadow:0 6px 18px rgba(0,0,0,0.4);
+  }
+  .marker-pulse{ animation:pulse 2.4s ease-in-out infinite; transform-origin:center; }
+  .marker-pulse.delay1{ animation-delay:.6s; }
+  .marker-pulse.delay2{ animation-delay:1.2s; }
+  @keyframes pulse{
+    0%,100%{ opacity:1; }
+    50%{ opacity:0.45; }
+  }
+  @media (prefers-reduced-motion: reduce){ .marker-pulse{ animation:none; } }
+  .phone-cta{
+    position:absolute; left:16px; right:16px; bottom:18px;
+    background:linear-gradient(160deg, var(--green), var(--green-dark));
+    color:#04140a; text-align:center; font-weight:600; font-size:0.78rem;
+    padding:11px; border-radius:10px;
+  }
+
+  .chip-grid{
+    display:grid; grid-template-columns:repeat(5,1fr); gap:16px;
+  }
+  .chip{
+    background:var(--surface); border:1px solid var(--line);
+    border-radius:14px; padding:22px 18px;
+    transition:border-color .2s ease, transform .2s ease;
+  }
+  .chip:hover{ border-color:var(--green); transform:translateY(-3px); }
+  .chip svg{ width:22px; height:22px; stroke:var(--green); margin-bottom:14px; }
+  .chip h3{ font-size:0.95rem; font-weight:600; }
+
+  .duo{ display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+  .duo-card{
+    background:var(--surface); border:1px solid var(--line);
+    border-radius:18px; padding:32px;
+  }
+  .duo-card.premium{
+    border-color:rgba(67,216,84,0.4);
+    box-shadow:0 0 40px -18px var(--glow);
+  }
+  .badge{
+    display:inline-block; font-family:'JetBrains Mono',monospace; font-size:0.72rem;
+    padding:4px 10px; border-radius:20px; margin-bottom:16px;
+  }
+  .badge.free{ background:rgba(245,247,246,0.08); color:var(--text-soft); }
+  .badge.premium{ background:rgba(67,216,84,0.14); color:var(--green); }
+  .duo-card h3{ font-size:1.25rem; margin-bottom:10px; }
+
+  .garage-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+  .vcard{
+    background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:24px;
+  }
+  .vcard .vtype{ font-size:0.78rem; color:var(--text-soft); margin-bottom:6px; }
+  .vcard h3{ font-size:1.1rem; }
+  .vcard .vfuel{ margin-top:4px; font-size:0.85rem; color:var(--text-soft); }
+  .vcard .vstatus{
+    margin-top:16px; display:inline-flex; align-items:center; gap:6px;
+    font-family:'JetBrains Mono',monospace; font-size:0.72rem; color:var(--green);
+  }
+  .vcard .vstatus .d{ width:6px; height:6px; border-radius:50%; background:var(--green); }
+
+  .trip-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:36px;
+  }
+  .trip-route{
+    display:flex; align-items:center; gap:16px; font-family:'Space Grotesk',sans-serif;
+    font-size:1.3rem; font-weight:600; margin-bottom:28px;
+  }
+  .trip-route .arrow{ color:var(--green); }
+  .trip-stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
+  .trip-stat .num{
+    font-family:'JetBrains Mono',monospace; font-size:1.5rem; color:var(--green); font-weight:600;
+  }
+  .trip-stat .lbl{ font-size:0.82rem; color:var(--text-soft); margin-top:6px; }
+  .trip-note{ margin-top:24px; font-size:0.8rem; color:var(--text-soft); }
+
+  .voice-wrap{ display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center; }
+  .chatbox{
+    background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:26px;
+    display:flex; flex-direction:column; gap:14px;
+  }
+  .bubble{
+    max-width:80%; padding:12px 16px; border-radius:14px; font-size:0.92rem;
+  }
+  .bubble.user{
+    align-self:flex-end; background:rgba(245,247,246,0.08); border-bottom-right-radius:4px;
+  }
+  .bubble.bot{
+    align-self:flex-start; background:rgba(67,216,84,0.12); color:var(--text);
+    border-bottom-left-radius:4px; border:1px solid rgba(67,216,84,0.25);
+  }
+
+  .premium-band{
+    background:radial-gradient(120% 140% at 0% 0%, rgba(67,216,84,0.14), transparent 60%), var(--surface);
+    border:1px solid rgba(67,216,84,0.3);
+    border-radius:22px; padding:56px 48px;
+  }
+  .premium-band h2{ font-size:clamp(1.7rem,3.4vw,2.3rem); }
+  .premium-list{ list-style:none; padding:0; margin:24px 0 0; display:flex; flex-direction:column; gap:10px; }
+  .premium-list li{ display:flex; align-items:center; gap:10px; font-size:0.95rem; }
+  .premium-list li.soon{ color:var(--text-soft); }
+  .check{ color:var(--green); font-weight:700; }
+
+  details{
+    border-top:1px solid var(--line); padding:20px 0;
+  }
+  details:last-child{ border-bottom:1px solid var(--line); }
+  summary{
+    cursor:pointer; font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:1.02rem;
+    list-style:none; display:flex; justify-content:space-between; align-items:center;
+  }
+  summary::-webkit-details-marker{ display:none; }
+  summary::after{ content:"+"; color:var(--green); font-size:1.3rem; }
+  details[open] summary::after{ content:"–"; }
+  details p{ margin-top:14px; padding-right:40px; }
+
+  .final-band{
+    text-align:left; border-radius:24px;
+    background:linear-gradient(135deg, #0d1613, #0a1210 60%);
+    border:1px solid var(--line);
+    padding:64px 48px; position:relative; overflow:hidden;
+  }
+  .final-band::before{
+    content:""; position:absolute; width:420px; height:420px; border-radius:50%;
+    background:radial-gradient(circle, rgba(67,216,84,0.25), transparent 70%);
+    top:-160px; right:-120px;
+  }
+  .final-band h2{ font-size:clamp(1.9rem,4vw,2.6rem); max-width:16ch; position:relative; }
+  .final-band p{ max-width:44ch; margin-top:14px; position:relative; }
+  .final-band .cta-row{ position:relative; }
+
+  footer.site{ border-top:1px solid var(--line); padding:64px 0 40px; }
+  .foot-grid{
+    display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:40px; margin-bottom:48px;
+  }
+  .foot-brand p{ margin-top:14px; max-width:26ch; font-size:0.92rem; }
+  .foot-col h4{
+    font-family:'JetBrains Mono',monospace; font-size:0.78rem; color:var(--text-soft);
+    font-weight:500; margin-bottom:14px;
+  }
+  .foot-col ul{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px; }
+  .foot-col a{ text-decoration:none; color:var(--text-soft); font-size:0.9rem; }
+  .foot-col a:hover{ color:var(--green); }
+  .ios-soon{ font-size:0.82rem; color:var(--text-soft); font-family:'JetBrains Mono',monospace; }
+  .foot-bottom{
+    border-top:1px solid var(--line); padding-top:24px; display:flex; justify-content:space-between;
+    font-size:0.85rem; color:var(--text-soft); flex-wrap:wrap; gap:10px;
+  }
+  .foot-bottom a{ text-decoration:none; }
+  .foot-bottom a:hover{ color:var(--green); }
+
+  .shots-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
+  .shot{ background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:10px; }
+  .shot img{ width:100%; height:auto; display:block; border-radius:12px; }
+  .shot p{ margin:10px 4px 2px; font-size:0.88rem; }
+
+  @media (max-width:900px){
+    .hero .wrap{ grid-template-columns:1fr; }
+    .phone-stage{ order:-1; margin-bottom:20px; }
+    .phone{ width:230px; height:466px; }
+    .chip-grid{ grid-template-columns:repeat(2,1fr); }
+    .duo{ grid-template-columns:1fr; }
+    .garage-grid{ grid-template-columns:1fr; }
+    .trip-stats{ grid-template-columns:repeat(2,1fr); }
+    .voice-wrap{ grid-template-columns:1fr; }
+    .foot-grid{ grid-template-columns:1fr 1fr; }
+    .shots-grid{ grid-template-columns:repeat(2,1fr); }
+  }
+  @media (max-width:640px){
+    .nav-links{ display:none; }
+    .burger{ display:block; }
+    section{ padding:64px 0; }
+    .chip-grid{ grid-template-columns:1fr; }
+    .trip-stats{ grid-template-columns:1fr 1fr; }
+    .foot-grid{ grid-template-columns:1fr; gap:32px; }
+    .final-band, .premium-band{ padding:40px 26px; }
+    .shots-grid{ grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site" id="siteHeader">
+  <nav class="wrap">
+    <div class="logo"><span class="logo-mark"></span> Octanivo</div>
+    <div class="nav-links">
+      <a href="#funzioni">Funzioni</a>
+      <a href="#garage">Garage</a>
+      <a href="#trip-planner">Trip Planner</a>
+      <a href="#anteprima">Anteprima</a>
+      <a href="#premium">Premium</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="nav-right">
+      <a class="btn btn-primary btn-sm" href="#download">Scarica</a>
+      <button class="burger" id="burgerBtn" aria-label="Apri menu">☰</button>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <h1>Meno spese.<br>Più strada.</h1>
+        <p class="lead">Octanivo ti aiuta a trovare distributori, confrontare i prezzi e pianificare i tuoi viaggi direttamente dal tuo smartphone.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#download">Google Play — in arrivo</a>
+          <a class="btn btn-ghost" href="#funzioni">Scopri come funziona</a>
+        </div>
+      </div>
+
+      <div class="phone-stage">
+        <div class="phone">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <svg viewBox="0 0 240 500" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20 420 C 60 380, 40 300, 90 260 S 160 190, 130 120 S 190 60, 210 30" stroke="#43d854" stroke-opacity="0.35" stroke-width="3" fill="none"/>
+              <circle class="marker-pulse" cx="90" cy="260" r="7" fill="#43d854"/>
+              <circle class="marker-pulse delay1" cx="130" cy="120" r="7" fill="#43d854"/>
+              <circle class="marker-pulse delay2" cx="60" cy="380" r="7" fill="#43d854"/>
+              <circle cx="20" cy="420" r="5" fill="#f5f7f6"/>
+            </svg>
+            <div class="price-chip" style="top:44%; left:34%;">€1.958</div>
+            <div class="price-chip" style="top:19%; left:56%;">€1.999</div>
+            <div class="price-chip" style="top:70%; left:6%;">€2.012</div>
+            <div class="phone-cta">Avvia navigazione</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="funzioni">
+    <div class="wrap reveal">
+      <div class="section-head">
+        <div class="label">Funzioni</div>
+        <h2>Tutti i distributori intorno a te.</h2>
+        <p>Visualizza i distributori sulla mappa, scegli il carburante che utilizzi e confronta rapidamente le alternative disponibili nella tua zona.</p>
+      </div>
+      <div class="chip-grid">
+        <div class="chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M9 20l-6-3V4l6 3 6-3 6 3v13l-6-3-6 3z"/><path d="M9 7v13M15 4v13"/></svg>
+          <h3>Mappa interattiva</h3>
+        </div>
+        <div class="chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+          <h3>Prezzi carburante</h3>
+        </div>
+        <div class="chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="6" cy="12" r="2"/><circle cx="18" cy="12" r="2"/><path d="M8 12h8"/></svg>
+          <h3>Distanza</h3>
+        </div>
+        <div class="chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 5h16M7 12h10M10 19h4"/></svg>
+          <h3>Filtri</h3>
+        </div>
+        <div class="chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M3 11l18-7-7 18-3-8-8-3z"/></svg>
+          <h3>Navigazione</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap reveal">
+      <div class="section-head">
+        <div class="label">Confronta</div>
+        <h2>Più vicino o più economico. Scegli tu.</h2>
+      </div>
+      <div class="duo">
+        <div class="duo-card">
+          <span class="badge free">FREE</span>
+          <h3>Più vicino</h3>
+          <p>Trova rapidamente il distributore più vicino alla tua posizione.</p>
+        </div>
+        <div class="duo-card premium">
+          <span class="badge premium">PREMIUM</span>
+          <h3>Più economico</h3>
+          <p>Trova il distributore con il prezzo più basso in base al carburante e al raggio che hai scelto.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="garage">
+    <div class="wrap reveal">
+      <div class="section-head">
+        <div class="label">Garage</div>
+        <h2>Il tuo Garage, dentro Octanivo.</h2>
+        <p>Salva i tuoi veicoli e lascia che Octanivo utilizzi le loro caratteristiche per rendere ogni ricerca e ogni viaggio più semplice.</p>
+      </div>
+      <div class="garage-grid">
+        <div class="vcard">
+          <div class="vtype">Auto</div>
+          <h3>Berlina compatta</h3>
+          <div class="vfuel">Diesel</div>
+          <div class="vstatus"><span class="d"></span> Attivo</div>
+        </div>
+        <div class="vcard">
+          <div class="vtype">Moto</div>
+          <h3>Naked 650</h3>
+          <div class="vfuel">Benzina</div>
+        </div>
+        <div class="vcard">
+          <div class="vtype">SUV</div>
+          <h3>SUV compatto</h3>
+          <div class="vfuel">GPL</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="trip-planner">
+    <div class="wrap reveal">
+      <div class="section-head">
+        <div class="label">Trip Planner</div>
+        <h2>Sai quanto spenderai prima ancora di partire.</h2>
+        <p>Imposta la destinazione, scegli il tuo veicolo e Octanivo può aiutarti a stimare distanza, durata, consumo e costo del viaggio.</p>
+      </div>
+      <div class="trip-card">
+        <div class="trip-route">Roma <span class="arrow">→</span> Milano</div>
+        <div class="trip-stats">
+          <div class="trip-stat"><div class="num" data-count="576" data-suffix=" km">0 km</div><div class="lbl">Distanza</div></div>
+          <div class="trip-stat"><div class="num" data-static="5h 44m">5h 44m</div><div class="lbl">Durata prevista</div></div>
+          <div class="trip-stat"><div class="num" data-count="37.5" data-decimal="1" data-suffix=" L">0 L</div><div class="lbl">Carburante stimato</div></div>
+          <div class="trip-stat"><div class="num" data-count="67.42" data-decimal="2" data-prefix="€">€0</div><div class="lbl">Costo stimato</div></div>
+        </div>
+        <div class="trip-note">* Dati dimostrativi a scopo illustrativo.</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap reveal voice-wrap">
+      <div>
+        <div class="label">Assistente vocale</div>
+        <h2 style="margin-top:10px; font-size:clamp(1.7rem,3.4vw,2.3rem);">Chiedilo a Octanivo.</h2>
+        <p style="margin-top:14px;">Usa la voce per modificare rapidamente filtri, ricerca e altre funzioni mentre utilizzi Octanivo.</p>
+      </div>
+      <div class="chatbox">
+        <div class="bubble user">"Trova i distributori diesel entro 10 km."</div>
+        <div class="bubble bot">"Ti mostro i distributori diesel nella zona."</div>
+      </div>
+    </div>
+  </section>
+
+
+  <section id="anteprima">
+    <div class="wrap reveal">
+      <div class="section-head">
+        <div class="label">Anteprima</div>
+        <h2>Octanivo, direttamente sul tuo smartphone.</h2>
+        <p>Cerca una città, visualizza i distributori della zona e pianifica i viaggi usando i dati del tuo veicolo.</p>
+      </div>
+      <div class="shots-grid">
+        <div class="shot"><img src="assets/mappa-genova.jpg" alt="Mappa Octanivo con distributori a Genova"><p>Mappa e distributori della zona</p></div>
+        <div class="shot"><img src="assets/percorso-roma-milano.jpg" alt="Trip Planner Octanivo da Roma a Milano"><p>Percorso e destinazione</p></div>
+        <div class="shot"><img src="assets/veicolo-trip.jpg" alt="Dati veicolo nel Trip Planner Octanivo"><p>Dati reali del veicolo</p></div>
+        <div class="shot"><img src="assets/stima-viaggio.jpg" alt="Stima viaggio Octanivo"><p>Distanza, tempo, carburante e costo</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="premium">
+    <div class="wrap reveal">
+      <div class="premium-band">
+        <div class="label">Octanivo Premium</div>
+        <h2 style="margin-top:10px;">Risparmia ancora di più.</h2>
+        <p style="margin-top:14px; max-width:48ch;">Sblocca strumenti avanzati pensati per aiutarti a individuare rapidamente le alternative più convenienti.</p>
+        <ul class="premium-list">
+          <li><span class="check">✓</span> Ricerca del distributore più economico</li>
+          <li class="soon">— Altre funzioni Premium in arrivo</li>
+        </ul>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#download">Scopri Premium</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap reveal">
+      <div class="section-head">
+        <div class="label">FAQ</div>
+        <h2>Domande frequenti.</h2>
+      </div>
+      <div>
+        <details>
+          <summary>Octanivo è gratuito?</summary>
+          <p>Octanivo offre funzioni gratuite e alcune funzionalità aggiuntive tramite Octanivo Premium.</p>
+        </details>
+        <details>
+          <summary>Posso utilizzare Octanivo senza attivare la posizione?</summary>
+          <p>La posizione rende alcune funzioni più immediate, ma puoi comunque cercare manualmente un luogo o una destinazione e visualizzare i distributori della zona.</p>
+        </details>
+        <details>
+          <summary>Quali carburanti supporta?</summary>
+          <p>Benzina, Diesel, GPL, Metano e altri tipi supportati dall'app.</p>
+        </details>
+        <details>
+          <summary>Posso salvare più auto?</summary>
+          <p>Sì. La sezione Garage permette di gestire più veicoli e scegliere quello attivo.</p>
+        </details>
+        <details>
+          <summary>Posso vedere il distributore più economico?</summary>
+          <p>La funzione di ricerca del distributore più economico fa parte delle funzionalità Premium.</p>
+        </details>
+        <details>
+          <summary>Octanivo funziona anche con le moto?</summary>
+          <p>Sì. Il Garage supporta diversi tipi di veicolo, comprese moto e scooter.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section id="download">
+    <div class="wrap reveal">
+      <div class="final-band">
+        <h2>La strada costa meno con Octanivo.</h2>
+        <p>Trova distributori, confronta prezzi e pianifica il tuo prossimo viaggio.</p>
+        <div class="cta-row" style="margin-top:28px;">
+          <span class="btn btn-primary" aria-disabled="true">Google Play — in arrivo</span>
+          <span class="ios-soon" style="align-self:center;">iOS — prossimamente</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="logo"><span class="logo-mark"></span> Octanivo</div>
+        <p>Risparmia carburante. Risparmia tempo. Viaggia meglio.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Prodotto</h4>
+        <ul>
+          <li><a href="#funzioni">Funzioni</a></li>
+          <li><a href="#anteprima">Anteprima</a>
+      <a href="#premium">Premium</a></li>
+          <li><a href="#trip-planner">Trip Planner</a></li>
+          <li><a href="#garage">Garage</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Supporto</h4>
+        <ul>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="mailto:info@octanivo.it">Contatti</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="termini.html">Termini</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Download</h4>
+        <ul>
+          <li><span class="ios-soon">Google Play — in arrivo</span></li>
+          <li><span class="ios-soon">iOS — prossimamente</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <div>© <span id="year"></span> Octanivo</div>
+      <div><a href="privacy.html">Privacy Policy</a> · <a href="termini.html">Termini di servizio</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const header = document.getElementById('siteHeader');
+  const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 8);
+  document.addEventListener('scroll', onScroll);
+  onScroll();
+
+  const burger = document.getElementById('burgerBtn');
+  const navLinks = document.querySelector('.nav-links');
+  burger.addEventListener('click', () => {
+    const open = navLinks.style.display === 'flex';
+    navLinks.style.display = open ? 'none' : 'flex';
+    navLinks.style.cssText += open ? '' : 'position:absolute;top:100%;left:0;right:0;flex-direction:column;background:#0d1512;padding:20px 32px;border-bottom:1px solid var(--line);gap:16px;';
+  });
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const revealEls = document.querySelectorAll('.reveal');
+  if(reduceMotion){
+    revealEls.forEach(el => el.classList.add('in'));
+  } else {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(el => io.observe(el));
+  }
+
+  const counters = document.querySelectorAll('[data-count]');
+  const animateCount = (el) => {
+    const target = parseFloat(el.dataset.count);
+    const decimals = parseInt(el.dataset.decimal || '0', 10);
+    const prefix = el.dataset.prefix || '';
+    const suffix = el.dataset.suffix || '';
+    if(reduceMotion){
+      el.textContent = prefix + target.toFixed(decimals) + suffix;
+      return;
+    }
+    const duration = 900;
+    const start = performance.now();
+    const step = (now) => {
+      const p = Math.min((now - start) / duration, 1);
+      const val = target * p;
+      el.textContent = prefix + val.toFixed(decimals) + suffix;
+      if(p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+  const cio = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        animateCount(entry.target);
+        cio.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.4 });
+  counters.forEach(el => cio.observe(el));
+</script>
+
+</body>
+</html>

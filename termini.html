@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Termini di servizio — Octanivo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#090f0d; --surface:#111815; --green:#43d854; --green-dark:#1fa63a;
+    --text:#f5f7f6; --text-soft:#a9b3ae; --line: rgba(245,247,246,0.09);
+  }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--bg); color:var(--text); font-family:'Inter',sans-serif; line-height:1.7; }
+  h1,h2{ font-family:'Space Grotesk',sans-serif; letter-spacing:-0.01em; }
+  a{ color:var(--green); }
+  p, li{ color:var(--text-soft); }
+  .wrap{ max-width:760px; margin:0 auto; padding:0 32px; }
+
+  header.site{ border-bottom:1px solid var(--line); }
+  nav.wrap{ display:flex; align-items:center; justify-content:space-between; padding:18px 32px; }
+  .logo{ display:flex; align-items:center; gap:10px; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.1rem; }
+  .logo-mark{ width:30px; height:30px; border-radius:9px; background:linear-gradient(160deg,var(--green),var(--green-dark)); position:relative; flex-shrink:0; }
+  .logo-mark::after{ content:""; position:absolute; left:50%; top:50%; width:9px; height:14px; transform:translate(-50%,-52%); border:2px solid #061009; border-radius:2px 2px 4px 4px; }
+  nav a.back{ font-size:0.9rem; color:var(--text-soft); text-decoration:none; }
+  nav a.back:hover{ color:var(--green); }
+
+  main{ padding:56px 0 80px; }
+  .eyebrow{ font-family:'JetBrains Mono',monospace; font-size:0.8rem; color:var(--green); }
+  h1{ font-size:clamp(1.8rem,4vw,2.4rem); margin:10px 0 6px; }
+  .updated{ color:var(--text-soft); font-size:0.9rem; margin-bottom:44px; }
+
+  section{ margin-bottom:36px; border-top:1px solid var(--line); padding-top:24px; }
+  h2{ font-size:1.15rem; margin-bottom:10px; }
+  ul{ padding-left:20px; margin:10px 0; }
+  li{ margin-bottom:6px; }
+
+  footer.site{ border-top:1px solid var(--line); padding:32px 0 48px; }
+  footer.site .wrap{ font-size:0.85rem; color:var(--text-soft); }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <nav class="wrap">
+    <div class="logo"><span class="logo-mark"></span> Octanivo</div>
+    <a class="back" href="index.html">← Torna al sito</a>
+  </nav>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="eyebrow">Documento legale</div>
+    <h1>Termini di servizio</h1>
+    <p class="updated">Ultimo aggiornamento: 12 settembre 2026</p>
+
+    <section>
+      <h2>Descrizione del servizio</h2>
+      <p>Octanivo è un'app che aiuta a individuare distributori di carburante, confrontarne i prezzi, gestire i propri veicoli in un Garage personale e pianificare viaggi stimandone i costi. Alcune funzioni, come la ricerca del distributore più economico, sono riservate agli utenti Octanivo Premium.</p>
+    </section>
+
+    <section>
+      <h2>Accuratezza dei dati</h2>
+      <p>I prezzi dei carburanti mostrati in app provengono da fonti pubbliche, incluso il MIMIT, e vengono aggiornati periodicamente: possono quindi differire dal prezzo effettivo al distributore al momento del rifornimento. Anche le stime del Trip Planner (distanza, durata, consumo, costo) sono indicative e non garantite.</p>
+    </section>
+
+    <section>
+      <h2>Octanivo Premium</h2>
+      <p>Octanivo Premium è un abbonamento opzionale che sblocca funzioni aggiuntive, gestito tramite Google Play Billing. L'attivazione, il rinnovo e la disdetta dell'abbonamento seguono le condizioni del Google Play Store.</p>
+    </section>
+
+    <section>
+      <h2>Uso corretto dell'app</h2>
+      <p>Ti chiediamo di usare Octanivo in conformità alla legge e di non utilizzare la navigazione o l'assistente vocale in modo da distrarti alla guida.</p>
+    </section>
+
+    <section>
+      <h2>Limitazione di responsabilità</h2>
+      <p>Octanivo è uno strumento di supporto alla decisione: non siamo responsabili per eventuali differenze tra i prezzi mostrati in app e quelli reali, né per ritardi o interruzioni del servizio dovuti a fattori esterni (connettività, disponibilità delle mappe, aggiornamento dei dati).</p>
+    </section>
+
+    <section>
+      <h2>Modifiche ai termini</h2>
+      <p>Questi termini possono essere aggiornati nel tempo. Le modifiche rilevanti verranno comunicate all'interno dell'app o su questo sito.</p>
+    </section>
+
+    <section>
+      <h2>Contatti</h2>
+      <p>Per domande su questi termini, scrivi a <a href="mailto:info@octanivo.it">info@octanivo.it</a>.</p>
+    </section>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">© <span id="year"></span> Octanivo</div>
+</footer>
+
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
