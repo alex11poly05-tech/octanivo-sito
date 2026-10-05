@@ -10,16 +10,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg: #090f0d;
-    --surface: #111815;
-    --surface-light: #18211d;
-    --green: #43d854;
-    --green-dark: #1fa63a;
-    --text: #f5f7f6;
-    --text-soft: #a9b3ae;
-    --line: rgba(245,247,246,0.09);
-    --line-strong: rgba(245,247,246,0.16);
-    --glow: rgba(67,216,84,0.35);
+    --bg: #070d1a;
+    --surface: #0e1626;
+    --surface-light: #152034;
+    --green: #22c4ea;
+    --green-dark: #1593b8;
+    --text: #f4f7fb;
+    --text-soft: #a3aec2;
+    --line: rgba(244,247,251,0.09);
+    --line-strong: rgba(244,247,251,0.16);
+    --glow: rgba(34,196,234,0.35);
   }
   *{ box-sizing:border-box; }
   html{ scroll-behavior:smooth; }
@@ -63,7 +63,7 @@
     transition:background .3s ease, border-color .3s ease, backdrop-filter .3s ease;
   }
   header.site.scrolled{
-    background:rgba(9,15,13,0.82);
+    background:rgba(7,13,26,0.82);
     backdrop-filter:blur(10px);
     border-color:var(--line);
   }
@@ -84,7 +84,7 @@
   .logo-mark::after{
     content:""; position:absolute; left:50%; top:50%;
     width:9px; height:14px; transform:translate(-50%,-52%);
-    border:2px solid #061009; border-radius:2px 2px 4px 4px;
+    border:2px solid #050b16; border-radius:2px 2px 4px 4px;
   }
   .nav-links{
     display:flex; gap:30px; font-size:0.92rem; color:var(--text-soft);
@@ -103,11 +103,11 @@
   }
   .btn-primary{
     background:linear-gradient(160deg, var(--green), var(--green-dark));
-    color:#04140a;
+    color:#06202b;
   }
   .btn-primary:hover{ box-shadow:0 8px 28px var(--glow); transform:translateY(-1px); }
   .btn-ghost{
-    border-color:var(--line-strong); color:var(--text); background:rgba(245,247,246,0.02);
+    border-color:var(--line-strong); color:var(--text); background:rgba(244,247,251,0.02);
   }
   .btn-ghost:hover{ border-color:var(--green); color:var(--green); }
   .btn-sm{ padding:9px 16px; font-size:0.85rem; }
@@ -136,7 +136,7 @@
   }
   .phone-screen{
     width:100%; height:100%; border-radius:26px; overflow:hidden;
-    background:radial-gradient(circle at 30% 20%, #10221a 0%, #0a1310 60%, #08100d 100%);
+    background:radial-gradient(circle at 30% 20%, #10264e 0%, #091222 60%, #080f1d 100%);
     position:relative;
   }
   .phone-screen svg{ width:100%; height:100%; display:block; }
@@ -156,7 +156,7 @@
   .phone-cta{
     position:absolute; left:16px; right:16px; bottom:18px;
     background:linear-gradient(160deg, var(--green), var(--green-dark));
-    color:#04140a; text-align:center; font-weight:600; font-size:0.78rem;
+    color:#06202b; text-align:center; font-weight:600; font-size:0.78rem;
     padding:11px; border-radius:10px;
   }
 
@@ -178,15 +178,15 @@
     border-radius:18px; padding:32px;
   }
   .duo-card.premium{
-    border-color:rgba(67,216,84,0.4);
+    border-color:rgba(34,196,234,0.4);
     box-shadow:0 0 40px -18px var(--glow);
   }
   .badge{
     display:inline-block; font-family:'JetBrains Mono',monospace; font-size:0.72rem;
     padding:4px 10px; border-radius:20px; margin-bottom:16px;
   }
-  .badge.free{ background:rgba(245,247,246,0.08); color:var(--text-soft); }
-  .badge.premium{ background:rgba(67,216,84,0.14); color:var(--green); }
+  .badge.free{ background:rgba(244,247,251,0.08); color:var(--text-soft); }
+  .badge.premium{ background:rgba(34,196,234,0.14); color:var(--green); }
   .duo-card h3{ font-size:1.25rem; margin-bottom:10px; }
 
   .garage-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
@@ -226,16 +226,16 @@
     max-width:80%; padding:12px 16px; border-radius:14px; font-size:0.92rem;
   }
   .bubble.user{
-    align-self:flex-end; background:rgba(245,247,246,0.08); border-bottom-right-radius:4px;
+    align-self:flex-end; background:rgba(244,247,251,0.08); border-bottom-right-radius:4px;
   }
   .bubble.bot{
-    align-self:flex-start; background:rgba(67,216,84,0.12); color:var(--text);
-    border-bottom-left-radius:4px; border:1px solid rgba(67,216,84,0.25);
+    align-self:flex-start; background:rgba(34,196,234,0.12); color:var(--text);
+    border-bottom-left-radius:4px; border:1px solid rgba(34,196,234,0.25);
   }
 
   .premium-band{
-    background:radial-gradient(120% 140% at 0% 0%, rgba(67,216,84,0.14), transparent 60%), var(--surface);
-    border:1px solid rgba(67,216,84,0.3);
+    background:radial-gradient(120% 140% at 0% 0%, rgba(34,196,234,0.14), transparent 60%), var(--surface);
+    border:1px solid rgba(34,196,234,0.3);
     border-radius:22px; padding:56px 48px;
   }
   .premium-band h2{ font-size:clamp(1.7rem,3.4vw,2.3rem); }
@@ -259,13 +259,13 @@
 
   .final-band{
     text-align:left; border-radius:24px;
-    background:linear-gradient(135deg, #0d1613, #0a1210 60%);
+    background:linear-gradient(135deg, #0d1729, #091121 60%);
     border:1px solid var(--line);
     padding:64px 48px; position:relative; overflow:hidden;
   }
   .final-band::before{
     content:""; position:absolute; width:420px; height:420px; border-radius:50%;
-    background:radial-gradient(circle, rgba(67,216,84,0.25), transparent 70%);
+    background:radial-gradient(circle, rgba(34,196,234,0.25), transparent 70%);
     top:-160px; right:-120px;
   }
   .final-band h2{ font-size:clamp(1.9rem,4vw,2.6rem); max-width:16ch; position:relative; }
@@ -348,7 +348,8 @@
         <h1>Meno spese.<br>Più strada.</h1>
         <p class="lead">Octanivo ti aiuta a trovare distributori, confrontare i prezzi e pianificare i tuoi viaggi direttamente dal tuo smartphone.</p>
         <div class="cta-row">
-          <a class="btn btn-primary" href="#download">Google Play — in arrivo</a>
+          <a class="btn btn-primary" href="https://apps.apple.com/it/app/octanivo/id6817669623">App Store</a>
+          <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.poli.octanivo">Google Play</a>
           <a class="btn btn-ghost" href="#funzioni">Scopri come funziona</a>
         </div>
       </div>
@@ -358,11 +359,11 @@
           <div class="phone-notch"></div>
           <div class="phone-screen">
             <svg viewBox="0 0 240 500" xmlns="http://www.w3.org/2000/svg">
-              <path d="M20 420 C 60 380, 40 300, 90 260 S 160 190, 130 120 S 190 60, 210 30" stroke="#43d854" stroke-opacity="0.35" stroke-width="3" fill="none"/>
-              <circle class="marker-pulse" cx="90" cy="260" r="7" fill="#43d854"/>
-              <circle class="marker-pulse delay1" cx="130" cy="120" r="7" fill="#43d854"/>
-              <circle class="marker-pulse delay2" cx="60" cy="380" r="7" fill="#43d854"/>
-              <circle cx="20" cy="420" r="5" fill="#f5f7f6"/>
+              <path d="M20 420 C 60 380, 40 300, 90 260 S 160 190, 130 120 S 190 60, 210 30" stroke="#22c4ea" stroke-opacity="0.35" stroke-width="3" fill="none"/>
+              <circle class="marker-pulse" cx="90" cy="260" r="7" fill="#22c4ea"/>
+              <circle class="marker-pulse delay1" cx="130" cy="120" r="7" fill="#22c4ea"/>
+              <circle class="marker-pulse delay2" cx="60" cy="380" r="7" fill="#22c4ea"/>
+              <circle cx="20" cy="420" r="5" fill="#f4f7fb"/>
             </svg>
             <div class="price-chip" style="top:44%; left:34%;">€1.958</div>
             <div class="price-chip" style="top:19%; left:56%;">€1.999</div>
@@ -564,8 +565,8 @@
         <h2>La strada costa meno con Octanivo.</h2>
         <p>Trova distributori, confronta prezzi e pianifica il tuo prossimo viaggio.</p>
         <div class="cta-row" style="margin-top:28px;">
-          <span class="btn btn-primary" aria-disabled="true">Google Play — in arrivo</span>
-          <span class="ios-soon" style="align-self:center;">iOS — prossimamente</span>
+          <a class="btn btn-primary" href="https://apps.apple.com/it/app/octanivo/id6817669623">Scarica su App Store</a>
+          <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.poli.octanivo">Scarica su Google Play</a>
         </div>
       </div>
     </div>
@@ -601,8 +602,8 @@
       <div class="foot-col">
         <h4>Download</h4>
         <ul>
-          <li><span class="ios-soon">Google Play — in arrivo</span></li>
-          <li><span class="ios-soon">iOS — prossimamente</span></li>
+          <li><a href="https://apps.apple.com/it/app/octanivo/id6817669623">App Store</a></li>
+          <li><a href="https://play.google.com/store/apps/details?id=com.poli.octanivo">Google Play</a></li>
         </ul>
       </div>
     </div>
@@ -626,7 +627,7 @@
   burger.addEventListener('click', () => {
     const open = navLinks.style.display === 'flex';
     navLinks.style.display = open ? 'none' : 'flex';
-    navLinks.style.cssText += open ? '' : 'position:absolute;top:100%;left:0;right:0;flex-direction:column;background:#0d1512;padding:20px 32px;border-bottom:1px solid var(--line);gap:16px;';
+    navLinks.style.cssText += open ? '' : 'position:absolute;top:100%;left:0;right:0;flex-direction:column;background:#0c1628;padding:20px 32px;border-bottom:1px solid var(--line);gap:16px;';
   });
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
