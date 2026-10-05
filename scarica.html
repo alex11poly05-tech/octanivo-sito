@@ -34,6 +34,16 @@
   .small { margin-top: 26px; font-size: .85rem; }
   .small a { color: var(--muted); }
 </style>
+<script>
+  // Porta subito allo store giusto in base al telefono; da computer restano i pulsanti.
+  (function () {
+    var ua = navigator.userAgent || "";
+    var ios = /iPhone|iPad|iPod/i.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+    var android = /Android/i.test(ua);
+    if (ios) location.replace("https://apps.apple.com/it/app/octanivo/id6817669623");
+    else if (android) location.replace("https://play.google.com/store/apps/details?id=com.poli.octanivo");
+  })();
+</script>
 </head>
 <body>
 <main>
