@@ -9,8 +9,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#090f0d; --surface:#111815; --green:#43d854; --green-dark:#1fa63a;
-    --text:#f5f7f6; --text-soft:#a9b3ae; --line: rgba(245,247,246,0.09);
+    --bg:#070d1a; --surface:#0e1626; --green:#22c4ea; --green-dark:#1593b8;
+    --text:#f4f7fb; --text-soft:#a3aec2; --line: rgba(244,247,251,0.09);
   }
   *{ box-sizing:border-box; }
   body{ margin:0; background:var(--bg); color:var(--text); font-family:'Inter',sans-serif; line-height:1.7; }
@@ -23,7 +23,7 @@
   nav.wrap{ display:flex; align-items:center; justify-content:space-between; padding:18px 32px; }
   .logo{ display:flex; align-items:center; gap:10px; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.1rem; }
   .logo-mark{ width:30px; height:30px; border-radius:9px; background:linear-gradient(160deg,var(--green),var(--green-dark)); position:relative; flex-shrink:0; }
-  .logo-mark::after{ content:""; position:absolute; left:50%; top:50%; width:9px; height:14px; transform:translate(-50%,-52%); border:2px solid #061009; border-radius:2px 2px 4px 4px; }
+  .logo-mark::after{ content:""; position:absolute; left:50%; top:50%; width:9px; height:14px; transform:translate(-50%,-52%); border:2px solid #050b16; border-radius:2px 2px 4px 4px; }
   nav a.back{ font-size:0.9rem; color:var(--text-soft); text-decoration:none; }
   nav a.back:hover{ color:var(--green); }
 
@@ -54,7 +54,7 @@
   <div class="wrap">
     <div class="eyebrow">Documento legale</div>
     <h1>Privacy Policy</h1>
-    <p class="updated">Ultimo aggiornamento: 12 settembre 2026</p>
+    <p class="updated">Ultimo aggiornamento: 6 ottobre 2026</p>
 
     <section>
       <h2>Introduzione</h2>
@@ -70,6 +70,8 @@
         <li><strong>Trip Planner:</strong> punti di partenza e destinazione che inserisci per stimare distanza, durata, consumo e costo di un viaggio.</li>
         <li><strong>Assistente vocale:</strong> se lo attivi, l'audio della tua voce viene elaborato per riconoscere i comandi (ricerca, cambio carburante o raggio, navigazione) tramite i servizi di riconoscimento vocale del sistema operativo. Puoi continuare a usare l'app senza attivare l'assistente vocale.</li>
         <li><strong>Acquisti Premium:</strong> se attivi Octanivo Premium, l'acquisto viene gestito tramite Google Play Billing su Android e tramite l'App Store di Apple su iPhone; Octanivo non memorizza i dati della tua carta di pagamento.</li>
+        <li><strong>Segnalazioni dei prezzi:</strong> quando arrivi a un distributore puoi confermare il prezzo mostrato o indicare quello reale ("Il prezzo era corretto?"). Salviamo il prezzo indicato, la data e un identificativo anonimo generato dall'app, senza nome, email o posizione. Le segnalazioni vengono mostrate agli altri utenti solo in forma aggregata (es. "confermato da 3 utenti").</li>
+        <li><strong>Pubblicità:</strong> se non sei abbonato a Premium, l'app mostra banner pubblicitari tramite Google AdMob. Google può trattare identificatori del dispositivo, indirizzo IP, posizione approssimativa e interazioni con gli annunci per mostrare e misurare la pubblicità. Nello Spazio economico europeo ti chiediamo il consenso prima degli annunci personalizzati e puoi modificarlo in qualsiasi momento da Preferenze. Con Octanivo Premium la pubblicità non viene mostrata.</li>
       </ul>
     </section>
 
@@ -89,7 +91,9 @@
       <ul>
         <li><strong>Google Maps</strong> per la visualizzazione della mappa e dei distributori;</li>
         <li><strong>Google Routes API</strong> per il calcolo dei percorsi e della navigazione;</li>
-        <li><strong>Google Play Billing</strong> (Android) e <strong>App Store di Apple</strong> (iPhone) per la gestione dell'abbonamento Octanivo Premium.</li>
+        <li><strong>Google Play Billing</strong> (Android) e <strong>App Store di Apple</strong> (iPhone) per la gestione dell'abbonamento Octanivo Premium;</li>
+        <li><strong>Google Firebase</strong> (Authentication anonima e Cloud Firestore, server in Europa) per salvare le segnalazioni dei prezzi;</li>
+        <li><strong>Google AdMob</strong> per la pubblicità agli utenti non Premium. Maggiori informazioni: <a href="https://policies.google.com/technologies/partner-sites?hl=it">come Google utilizza i dati</a>.</li>
       </ul>
       <p>Questi fornitori ricevono solo i dati necessari a offrire il proprio servizio (ad esempio la posizione per calcolare un percorso).</p>
     </section>
@@ -97,6 +101,7 @@
     <section>
       <h2>Conservazione dei dati</h2>
       <p>I dati del Garage e le preferenze restano salvati localmente sul tuo dispositivo finché non li elimini tu stesso dall'app o non disinstalli Octanivo.</p>
+      <p>Le segnalazioni dei prezzi sono legate solo a un identificativo anonimo; gli identificativi anonimi inattivi vengono eliminati automaticamente dopo 30 giorni.</p>
     </section>
 
     <section>
