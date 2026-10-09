@@ -54,7 +54,7 @@
   <div class="wrap">
     <div class="eyebrow">Documento legale</div>
     <h1>Privacy Policy</h1>
-    <p class="updated">Ultimo aggiornamento: 7 ottobre 2026</p>
+    <p class="updated">Ultimo aggiornamento: 9 ottobre 2026</p>
 
     <section>
       <h2>Introduzione</h2>
@@ -70,8 +70,8 @@
         <li><strong>Trip Planner:</strong> punti di partenza e destinazione che inserisci per stimare distanza, durata, consumo e costo di un viaggio.</li>
         <li><strong>Assistente vocale:</strong> se lo attivi, l'audio della tua voce viene elaborato per riconoscere i comandi (ricerca, cambio carburante o raggio, navigazione) tramite i servizi di riconoscimento vocale del sistema operativo. Puoi continuare a usare l'app senza attivare l'assistente vocale.</li>
         <li><strong>Acquisti Premium:</strong> se attivi Octanivo Premium, l'acquisto viene gestito tramite Google Play Billing su Android e tramite l'App Store di Apple su iPhone; Octanivo non memorizza i dati della tua carta di pagamento.</li>
-        <li><strong>Segnalazioni dei prezzi:</strong> quando arrivi a un distributore puoi confermare il prezzo mostrato o indicare quello reale ("Il prezzo era corretto?"). Salviamo il prezzo indicato, la data e un identificativo anonimo generato dall'app, senza nome, email o posizione. Le segnalazioni vengono mostrate agli altri utenti solo in forma aggregata (es. "confermato da 3 utenti").</li>
-        <li><strong>Avvisi sui prezzi:</strong> se scegli "Avvisami se il prezzo scende" su un distributore, salviamo l'elenco dei distributori che segui e un codice tecnico per le notifiche del tuo dispositivo (Firebase Cloud Messaging), collegati a un identificativo anonimo. Ogni mattina un nostro servizio confronta i prezzi pubblicati dal MIMIT e ti invia una notifica se uno di questi distributori è sceso di prezzo. Puoi smettere di seguire un distributore in qualsiasi momento: quando non ne segui più nessuno, questi dati vengono cancellati.</li>
+        <li><strong>Segnalazioni dei prezzi:</strong> quando arrivi a un distributore puoi confermare il prezzo mostrato o indicare quello reale ("Il prezzo era corretto?"). Salviamo il prezzo indicato, la data e un identificativo anonimo generato dall'app, senza nome, email o posizione. Le segnalazioni vengono mostrate agli altri utenti, nella scheda del distributore e sulla mappa, solo in forma aggregata (es. "confermato da 3 utenti").</li>
+        <li><strong>Avvisi sui prezzi nella tua zona:</strong> se le notifiche sono attive in Preferenze, salviamo sui nostri server (Cloud Firestore, in Europa) una posizione approssimativa, arrotondata a circa 1 km e mai quella esatta, insieme al raggio di ricerca, al carburante preferito e a un codice tecnico per le notifiche del tuo dispositivo (Firebase Cloud Messaging), collegati a un identificativo anonimo. Ogni mattina un nostro servizio confronta i prezzi pubblicati dal MIMIT nella tua zona e, se il prezzo più basso è sceso, ti invia al massimo una notifica al giorno. La posizione salvata si aggiorna solo quando ti sposti di qualche chilometro. Se disattivi le notifiche in Preferenze questi dati vengono cancellati; se disinstalli l&#39;app vengono cancellati automaticamente quando il servizio rileva che le notifiche non sono più recapitabili.</li>
         <li><strong>Statistiche d'uso anonime:</strong> per capire quali funzioni vengono usate e migliorare l'app raccogliamo eventi d'uso anonimi (ad esempio apertura dell'app, ricerca di un luogo, avvio della navigazione) tramite Google Analytics for Firebase, senza nome, email o dati pubblicitari. Puoi disattivarle in qualsiasi momento da Preferenze → "Statistiche anonime".</li>
         <li><strong>Pubblicità:</strong> se non sei abbonato a Premium, l'app mostra banner pubblicitari tramite Google AdMob. Google può trattare identificatori del dispositivo, indirizzo IP, posizione approssimativa e interazioni con gli annunci per mostrare e misurare la pubblicità. Nello Spazio economico europeo ti chiediamo il consenso prima degli annunci personalizzati e puoi modificarlo in qualsiasi momento da Preferenze. Con Octanivo Premium la pubblicità non viene mostrata.</li>
       </ul>
@@ -94,7 +94,7 @@
         <li><strong>Google Maps</strong> per la visualizzazione della mappa e dei distributori;</li>
         <li><strong>Google Routes API</strong> per il calcolo dei percorsi e della navigazione;</li>
         <li><strong>Google Play Billing</strong> (Android) e <strong>App Store di Apple</strong> (iPhone) per la gestione dell'abbonamento Octanivo Premium;</li>
-        <li><strong>Google Firebase</strong> (Authentication anonima, Cloud Firestore con server in Europa, Cloud Messaging per le notifiche e Analytics) per salvare le segnalazioni dei prezzi e per le statistiche d'uso anonime;</li>
+        <li><strong>Google Firebase</strong> (Authentication anonima, Cloud Firestore con server in Europa, Cloud Messaging per le notifiche e Analytics) per salvare le segnalazioni dei prezzi, per gli avvisi sui prezzi nella tua zona e per le statistiche d'uso anonime;</li>
         <li><strong>Google AdMob</strong> per la pubblicità agli utenti non Premium. Maggiori informazioni: <a href="https://policies.google.com/technologies/partner-sites?hl=it">come Google utilizza i dati</a>.</li>
       </ul>
       <p>Questi fornitori ricevono solo i dati necessari a offrire il proprio servizio (ad esempio la posizione per calcolare un percorso).</p>
